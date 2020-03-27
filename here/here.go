@@ -16,6 +16,7 @@ type Client struct {
 	AutocompleteGeocoding *AutocompleteGeocodingService
 	Weather               *WeatherService
 	Places                *PlacesService
+	Images                *ImagesService
 }
 
 // NewRoutingClient returns a new RoutingClient.
@@ -69,5 +70,14 @@ func NewPlacesClient(httpClient *http.Client) *Client {
 	return &Client{
 		sling:  base,
 		Places: newPlacesService(base.New()),
+	}
+}
+
+// NewImagesClient returns a new ImagesClient.
+func NewImagesClient(httpClient *http.Client) *Client {
+	base := sling.New().Client(httpClient).Base("https://image.maps.ls.hereapi.com/mia/1.6/")
+	return &Client{
+		sling:  base,
+		Images: newImagesService(base.New()),
 	}
 }

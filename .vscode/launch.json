@@ -1,18 +1,14 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-
 		{
-			"name": "Debug",
+			"name": "Launch",
 			"type": "go",
 			"request": "launch",
-			"mode": "test",
-			"program": "${workspaceFolder}/here",
+			"mode": "auto",
+			"program": "${file}",
 			"env": {},
-			"args": [
-                "-test.run",
-		        "TestAutocompleteGeocodingService_DetailsForSuggestion"
-            ]
+			"args": []
 		}
 	]
 }

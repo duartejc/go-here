@@ -42,4 +42,9 @@ func main() {
 	fmt.Println(autocompleteGeocodingResponse)
 	fmt.Println(httpResponse)
 	fmt.Println(err)
+
+	imagesClient := here.NewImagesClient(httpClient)
+	imagesParameters := imagesClient.Images.CreateImagesParams([2]float32{40.7499714, -73.9979574}, [2]float32{40.7456827, -73.9954344}, "pAq9rujQoKVS5BzQV030CmV7IpsaGvuc_0QiD6rwfgY")
+	imagesResponse, httpResponse, err = imagesClient.Images.Routing(&imagesParameters)
+	fmt.Println(imagesResponse)
 }
