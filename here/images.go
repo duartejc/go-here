@@ -59,6 +59,7 @@ func (s *ImagesService) Routing(params *ImagesParams) ([]byte, *http.Response, e
 
 	buf := bytes.Buffer{}
 	buf.WriteString(s.baseURL)
+	buf.WriteString("routing?")
 	buf.WriteString(v.Encode())
 
 	reqURL := buf.String()
