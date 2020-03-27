@@ -3,14 +3,14 @@ package here
 import (
 	"io/ioutil"
 	"net/http"
-"bytes"
+	"bytes"
 	"github.com/dghubble/sling"
 	"github.com/google/go-querystring/query"
 )
 
 // ImagesService provides for HERE Places api.
 type ImagesService struct {
-	httpClient *http.Client,
+	httpClient *http.Client
 	baseURL string
 }
 
@@ -39,9 +39,7 @@ func newImagesService(httpClient *http.Client, baseURL string) *ImagesService {
 }
 
 // CreateImagesParams creates images parameters struct.
-func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]float32, apiKey string) ImagesParams {
-	stringWaypoint0 := createWaypoint(waypoint0)
-	stringWaypoint1 := createWaypoint(waypoint1)
+func (s *ImagesService) CreateImagesParams(waypod28d38d8f485
 
 	imagesParams := ImagesParams{
 		Waypoint0: stringWaypoint0,
