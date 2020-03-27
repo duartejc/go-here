@@ -1,7 +1,6 @@
 package here
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/dghubble/sling"
@@ -50,8 +49,8 @@ func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]fl
 
 // Routing with given parameters.
 func (s *ImagesService) Routing(params *ImagesParams) (interface{}, *http.Response, error) {
-	routes := new(ImagesResponse)
+	routes := new([]bytes)
 	apiError := new(APIError)
 	resp, err := s.sling.New().Get("routing").QueryStruct(params).Receive(routes, apiError)
-	return resp, relevantError(err, *apiError)
+	return routes, resp, relevantError(err, *apiError)
 }
