@@ -3,13 +3,15 @@ package here
 import (
 	"io/ioutil"
 	"net/http"
-
+"bytes"
 	"github.com/dghubble/sling"
+	"github.com/google/go-querystring/query"
 )
 
 // ImagesService provides for HERE Places api.
 type ImagesService struct {
-	sling *sling.Sling
+	httpClient *http.Client,
+	baseURL string
 }
 
 // ImagesParams parameters for Images Service.
@@ -29,9 +31,10 @@ type ImagesParams struct {
 }
 
 // newImagesService returns a new ImagesService.
-func newImagesService(sling *sling.Sling) *ImagesService {
+func newImagesService(httpClient *http.Client, baseURL string) *ImagesService {
 	return &ImagesService{
-		sling: sling,
+		httpClient: httpClient,
+		baseURL: baseURL,
 	}
 }
 
@@ -51,8 +54,17 @@ func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]fl
 // Routing with given parameters.
 func (s *ImagesService) Routing(params *ImagesParams) ([]byte, *http.Response, error) {
 	apiError := new(APIError)
-	req, err := s.sling.New().Get("routing").QueryStruct(params).Request()
-	// TODO
-	buf, _ := ioutil.ReadAll(req.Body)
-	return buf, nil, relevantError(err, *apiError)
+
+	v, _ := query.Values(params)
+	
+	buf := bytes.Buffer{}
+  	buf.WriteString(s.baseURL)
+	buf.WriteString(v.Encode())
+	  
+  	reqURL := buf.String()
+
+	resp, err := http.Get(reqURL)
+	body, _ := ioutil.ReadAll(resp.Body)
+
+	return body, nil, relevantError(err, *apiError)
 }

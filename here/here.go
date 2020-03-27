@@ -75,9 +75,8 @@ func NewPlacesClient(httpClient *http.Client) *Client {
 
 // NewImagesClient returns a new ImagesClient.
 func NewImagesClient(httpClient *http.Client) *Client {
-	base := sling.New().Client(httpClient).Base("https://image.maps.ls.hereapi.com/mia/1.6/")
+	baseURL := "https://image.maps.ls.hereapi.com/mia/1.6/"
 	return &Client{
-		sling:  base,
-		Images: newImagesService(base.New()),
+		Images: newImagesService(httpClient, baseURL),
 	}
 }
