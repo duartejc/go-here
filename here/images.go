@@ -52,7 +52,7 @@ func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]fl
 func (s *ImagesService) Routing(params *ImagesParams) ([]byte, *http.Response, error) {
 	apiError := new(APIError)
 	req, _ := s.sling.New().Get("routing").QueryStruct(params).Request()
-	resp, err := s.httpClient.Do(req)
+	resp, err := s.sling.httpClient.Do(req)
 	buf, _ := ioutil.ReadAll(req.Body)
 	return buf, resp, relevantError(err, *apiError)
 }
