@@ -2,7 +2,6 @@ package here
 
 import (
 	"io/ioutil"
-	"net/http"
 
 	"github.com/dghubble/sling"
 )
@@ -49,9 +48,9 @@ func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]fl
 }
 
 // Routing with given parameters.
-func (s *ImagesService) Routing(params *ImagesParams) ([]byte, *http.Response, error) {
+func (s *ImagesService) Routing(params *ImagesParams) ([]byte, error) {
 	apiError := new(APIError)
 	req, err := s.sling.New().Get("routing").QueryStruct(params).Request()
 	buf, _ := ioutil.ReadAll(req.Body)
-	return buf, resp, relevantError(err, *apiError)
+	return buf, relevantError(err, *apiError)
 }
