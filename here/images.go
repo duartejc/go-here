@@ -35,12 +35,6 @@ func newImagesService(sling *sling.Sling) *ImagesService {
 	}
 }
 
-// Returns waypoints as a formatted string.
-func createWaypoint(waypoint [2]float32) string {
-	waypoints := fmt.Sprintf("%f,%f", waypoint[0], waypoint[1])
-	return waypoints
-}
-
 // CreateImagesParams creates images parameters struct.
 func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]float32, apiKey string) ImagesParams {
 	stringWaypoint0 := createWaypoint(waypoint0)
@@ -55,9 +49,9 @@ func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]fl
 }
 
 // Routing with given parameters.
-func (s *ImagesService) Routing(params *ImagesParams) (*ImagesResponse, *http.Response, error) {
+func (s *ImagesService) Routing(params *ImagesParams) (interface{}, *http.Response, error) {
 	routes := new(ImagesResponse)
 	apiError := new(APIError)
 	resp, err := s.sling.New().Get("routing").QueryStruct(params).Receive(routes, apiError)
-	return routes, resp, relevantError(err, *apiError)
+	return resp, relevantError(err, *apiError)
 }
