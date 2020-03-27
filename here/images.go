@@ -49,7 +49,7 @@ func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]fl
 
 // Routing with given parameters.
 func (s *ImagesService) Routing(params *ImagesParams) (interface{}, *http.Response, error) {
-	routes := new([]bytes)
+	routes := new([]byte)
 	apiError := new(APIError)
 	resp, err := s.sling.New().Get("routing").QueryStruct(params).Receive(routes, apiError)
 	return routes, resp, relevantError(err, *apiError)
