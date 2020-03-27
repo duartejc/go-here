@@ -2,6 +2,7 @@ package here
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -64,6 +65,7 @@ func (s *ImagesService) Routing(params *ImagesParams) ([]byte, *http.Response, e
 
 	reqURL := buf.String()
 
+	fmt.Print(reqURL)
 	resp, err := http.Get(reqURL)
 	body, _ := ioutil.ReadAll(resp.Body)
 
