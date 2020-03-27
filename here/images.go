@@ -17,18 +17,18 @@ type ImagesService struct {
 
 // ImagesParams parameters for Images Service.
 type ImagesParams struct {
-	Waypoint0  string `url:"waypoint0"`
-	Waypoint1  string `url:"waypoint1"`
-	Poi0       string `url:"poi0"`
-	Poi1       string `url:"poi1"`
-	LineColor0 string `url:"lc0"`
-	LineColor1 string `url:"lc1"`
-	LineWidth0 string `url:"lw0"`
-	LineWidth1 string `url:"lw1"`
-	Resolution int    `url:"ppi"`
-	Width      int    `url:"w"`
-	Height     int    `url:"h"`
-	APIKey     string `url:"apikey"`
+	Waypoint0 string `url:"waypoint0"`
+	Waypoint1 string `url:"waypoint1"`
+	// Poi0       string `url:"poi0"`
+	// Poi1       string `url:"poi1"`
+	// LineColor0 string `url:"lc0"`
+	// LineColor1 string `url:"lc1"`
+	// LineWidth0 string `url:"lw0"`
+	// LineWidth1 string `url:"lw1"`
+	// Resolution int    `url:"ppi"`
+	// Width      int    `url:"w"`
+	// Height     int    `url:"h"`
+	APIKey string `url:"apikey"`
 }
 
 // newImagesService returns a new ImagesService.
