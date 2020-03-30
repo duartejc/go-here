@@ -19,7 +19,7 @@ type ImagesService struct {
 type ImagesParams struct {
 	Waypoint0 string `url:"waypoint0"`
 	Waypoint1 string `url:"waypoint1"`
-	// Poi0       string `url:"poi0"`
+	Poi0      string `url:"poi0"`
 	// Poi1       string `url:"poi1"`
 	// LineColor0 string `url:"lc0"`
 	// LineColor1 string `url:"lc1"`
@@ -40,13 +40,15 @@ func newImagesService(httpClient *http.Client, baseURL string) *ImagesService {
 }
 
 // CreateImagesParams creates images parameters struct.
-func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]float32, apiKey string) ImagesParams {
+func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]float32, poi0 [2]float32, apiKey string) ImagesParams {
 	stringWaypoint0 := createWaypoint(WaypointParams{Coordinates: waypoint0})
 	stringWaypoint1 := createWaypoint(WaypointParams{Coordinates: waypoint1})
+	stringPoi0 := createWaypoint(WaypointParams{Coordinates: poi0})
 
 	imagesParams := ImagesParams{
 		Waypoint0: stringWaypoint0,
 		Waypoint1: stringWaypoint1,
+		Poi0:      stringPoi0,
 		APIKey:    apiKey,
 	}
 	return imagesParams
