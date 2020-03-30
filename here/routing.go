@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/dghubble/sling"
@@ -162,10 +163,10 @@ func (s *RoutingService) CreateRoutingParams(waypoints []WaypointParams, apiKey 
 		Departure: "now",
 	}
 
-	for _, waypoint := range waypoints {
+	for i, waypoint := range waypoints {
 		stringWaypoint := createWaypoint(waypoint)
-		// waypointFieldName := fmt.Sprintf("Waypoint%s", idx)
-		reflect.ValueOf(&routingParams).Elem().FieldByName("Waypoint0").SetString(stringWaypoint)
+		concatenated := "Waypoint" + strconv.Itoa(i)
+		reflect.ValueOf(&routingParams).Elem().FieldByName(concatenated).SetString(stringWaypoint)
 	}
 
 	fmt.Printf("%v", routingParams)
