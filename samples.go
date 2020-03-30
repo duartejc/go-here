@@ -36,10 +36,10 @@ func main() {
 	landmarkParameters := reverseGeocodingClient.ReverseGeocoding.CreateLandmarksParameters([2]float32{42.3902, -71.1293}, 1, 9, "appID", "appCode")
 	geocodingResponse, httpResponse, err = reverseGeocodingClient.ReverseGeocoding.Landmarks(&landmarkParameters)
 
-	autocompleteGeocodingClient := here.NewAutocompleteGeocodingClient(httpClient)
-	suggestionsParameters := autocompleteGeocodingClient.AutocompleteGeocoding.CreateDetailsForSuggestionParameters("Pariser 1 Berl", "appID", "appCode")
-	autocompleteGeocodingResponse, httpResponse, err := autocompleteGeocodingClient.AutocompleteGeocoding.DetailsForSuggestion(&suggestionsParameters)
-	fmt.Println(autocompleteGeocodingResponse)
-	fmt.Println(httpResponse)
-	fmt.Println(err)
+	// autocompleteGeocodingClient := here.NewAutocompleteGeocodingClient(httpClient)
+	// suggestionsParameters := autocompleteGeocodingClient.AutocompleteGeocoding.CreateDetailsForSuggestionParameters("Pariser 1 Berl", "appID", "appCode")
+	// autocompleteGeocodingResponse, httpResponse, err := autocompleteGeocodingClient.AutocompleteGeocoding.DetailsForSuggestion(&suggestionsParameters)
+	// fmt.Println(autocompleteGeocodingResponse)
+	// fmt.Println(httpResponse)
+	// fmt.Println(err)
 }
