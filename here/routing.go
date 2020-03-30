@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
+	"reflect"
 	"time"
 
 	"github.com/dghubble/sling"
@@ -12,6 +13,12 @@ import (
 // RoutingService provides for HERE routing api.
 type RoutingService struct {
 	sling *sling.Sling
+}
+
+// WaypointParams params
+type WaypointParams struct {
+	coordinates [2]float32
+	stopOver    int
 }
 
 // RoutingParams parameters for Routing Service.
@@ -131,15 +138,18 @@ func newRoutingService(sling *sling.Sling) *RoutingService {
 }
 
 // Returns waypoints as a formatted string.
-func createWaypoint(waypoint [2]float32) string {
-	waypoints := fmt.Sprintf("%f,%f", waypoint[0], waypoint[1])
-	return waypoints
+func createWaypoint(waypoint WaypointParams) string {
+	if waypoint.stopOver > 0 {
+		stopOver :=
+		return fmt.Sprintf("geo!stopOver,%d!%f,%f", waypoint.stopOver, waypoint[0], waypoint[1])
+	} else {
+		return fmt.Sprintf("geo!%f,%f", waypoint[0], waypoint[1])
+	}
 }
 
 // CreateRoutingParams creates routing parameters struct.
-func (s *RoutingService) CreateRoutingParams(waypoint0 [2]float32, waypoint1 [2]float32, apiKey string, modes []Enum) RoutingParams {
-	stringWaypoint0 := createWaypoint(waypoint0)
-	stringWaypoint1 := createWaypoint(waypoint1)
+func (s *RoutingService) CreateRoutingParams(waypoints []WaypointParams, apiKey string, modes []Enum) RoutingParams {
+
 	var buffer bytes.Buffer
 	for _, routeMode := range modes {
 		mode := Enum.ValueOfRouteMode(routeMode)
@@ -148,12 +158,17 @@ func (s *RoutingService) CreateRoutingParams(waypoint0 [2]float32, waypoint1 [2]
 	routeModes := buffer.String()
 	routeModes = routeModes[:len(routeModes)-1]
 	routingParams := RoutingParams{
-		Waypoint0: stringWaypoint0,
-		Waypoint1: stringWaypoint1,
 		APIKey:    apiKey,
 		Modes:     routeModes,
 		Departure: "now",
 	}
+
+	for idx, waypoint := range waypoints {
+		stringWaypoint := createWaypoint(waypoint)
+		waypointFieldName := fmt.Sprintf("Waypoint%s", idx)
+		reflect.ValueOf(&routingParams).Elem().FieldByName(waypointFieldName).SetString(stringWaypoint)
+	}
+
 	return routingParams
 }
 
