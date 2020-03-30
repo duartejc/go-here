@@ -43,8 +43,8 @@ func newImagesService(httpClient *http.Client, baseURL string) *ImagesService {
 func (s *ImagesService) CreateImagesParams(waypoints []WaypointParams, apiKey string) ImagesParams {
 
 	stringWaypoint0 := createWaypoint(WaypointParams{Coordinates: waypoints[0].Coordinates})
-	stringWaypoint1 := createWaypoint(WaypointParams{Coordinates: waypoints[1].Coordinates})
-	stringPoi0 := createWaypoint(WaypointParams{Coordinates: waypoints[2].Coordinates})
+	stringWaypoint1 := createWaypoint(WaypointParams{Coordinates: waypoints[2].Coordinates})
+	stringPoi0 := createWaypoint(WaypointParams{Coordinates: waypoints[1].Coordinates})
 
 	imagesParams := ImagesParams{
 		Waypoint0: stringWaypoint0,
