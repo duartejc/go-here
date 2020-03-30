@@ -140,7 +140,6 @@ func newRoutingService(sling *sling.Sling) *RoutingService {
 // Returns waypoints as a formatted string.
 func createWaypoint(waypoint WaypointParams) string {
 	if waypoint.stopOver > 0 {
-		stopOver :=
 		return fmt.Sprintf("geo!stopOver,%d!%f,%f", waypoint.stopOver, waypoint[0], waypoint[1])
 	} else {
 		return fmt.Sprintf("geo!%f,%f", waypoint[0], waypoint[1])
