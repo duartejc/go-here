@@ -45,7 +45,7 @@ func (s *ImagesService) CreateImagesParams(waypoints []WaypointParams, apiKey st
 
 	stringWaypoint0 := createWaypoint(WaypointParams{Coordinates: waypoints[0].Coordinates})
 	stringWaypoint1 := createWaypoint(WaypointParams{Coordinates: waypoints[2].Coordinates})
-	stringPoi0 := fmt.Sprintf("%s;white;black;12;%s", createWaypoint(WaypointParams{Coordinates: waypoints[1].Coordinates}), waypoints[1].Text)
+	stringPoi0 := fmt.Sprintf("%swhite;black;12;%s", createWaypoint(WaypointParams{Coordinates: waypoints[1].Coordinates}), waypoints[1].Text)
 
 	imagesParams := ImagesParams{
 		Waypoint0: stringWaypoint0,
