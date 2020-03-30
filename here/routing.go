@@ -20,6 +20,7 @@ type RoutingService struct {
 type WaypointParams struct {
 	Coordinates [2]float32
 	StopOver    int
+	Text        string
 }
 
 // RoutingParams parameters for Routing Service.
@@ -142,9 +143,9 @@ func newRoutingService(sling *sling.Sling) *RoutingService {
 // Returns waypoints as a formatted string.
 func createWaypoint(waypoint WaypointParams) string {
 	if waypoint.StopOver > 0 {
-		return fmt.Sprintf("geo!stopOver,%d!%f,%f", waypoint.StopOver, waypoint.Coordinates[0], waypoint.Coordinates[1])
+		return fmt.Sprintf("geo!stopOver,%d!%f,%f;white;black;12;%s;", waypoint.StopOver, waypoint.Coordinates[0], waypoint.Coordinates[1], waypoint.Text)
 	} else {
-		return fmt.Sprintf("geo!%f,%f", waypoint.Coordinates[0], waypoint.Coordinates[1])
+		return fmt.Sprintf("geo!%f,%f;white;black;12;%s;", waypoint.Coordinates[0], waypoint.Coordinates[1], waypoint.Text)
 	}
 }
 
