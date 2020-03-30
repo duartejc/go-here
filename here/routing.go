@@ -168,6 +168,8 @@ func (s *RoutingService) CreateRoutingParams(waypoints []WaypointParams, apiKey 
 		reflect.ValueOf(&routingParams).Elem().FieldByName("Waypoint0").SetString(stringWaypoint)
 	}
 
+	fmt.Printf("%v", routingParams)
+
 	return routingParams
 }
 
