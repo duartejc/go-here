@@ -115,8 +115,8 @@ func (s *GeocodingService) Search(params *SearchTextParameters) (*GeocodingRespo
 
 // CreateMapView Creates mapview parameter with given latitudes and longitudes.
 func (s *GeocodingService) CreateMapView(latlong0 [2]float32, latlong1 [2]float32) string {
-	waypoint0 := createWaypoint(WaypointParams{coordinates: latlong0})
-	waypoint1 := createWaypoint(WaypointParams{coordinates: latlong1})
+	waypoint0 := createWaypoint(WaypointParams{Coordinates: latlong0})
+	waypoint1 := createWaypoint(WaypointParams{Coordinates: latlong1})
 	mapView := fmt.Sprintf("%s;%s", waypoint0, waypoint1)
 	return mapView
 }

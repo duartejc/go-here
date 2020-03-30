@@ -41,8 +41,8 @@ func newImagesService(httpClient *http.Client, baseURL string) *ImagesService {
 
 // CreateImagesParams creates images parameters struct.
 func (s *ImagesService) CreateImagesParams(waypoint0 [2]float32, waypoint1 [2]float32, apiKey string) ImagesParams {
-	stringWaypoint0 := createWaypoint(WaypointParams{coordinates: waypoint0})
-	stringWaypoint1 := createWaypoint(WaypointParams{coordinates: waypoint1})
+	stringWaypoint0 := createWaypoint(WaypointParams{Coordinates: waypoint0})
+	stringWaypoint1 := createWaypoint(WaypointParams{Coordinates: waypoint1})
 
 	imagesParams := ImagesParams{
 		Waypoint0: stringWaypoint0,
