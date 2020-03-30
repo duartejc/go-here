@@ -19,7 +19,7 @@ type ImagesService struct {
 type ImagesParams struct {
 	Waypoint0 string `url:"waypoint0"`
 	Waypoint1 string `url:"waypoint1"`
-	Poi0      string `url:"poi0x"`
+	Poi0      string `url:"poix0"`
 	Poithm    int    `url:"poithm"`
 	// Poi1       string `url:"poi1"`
 	// LineColor0 string `url:"lc0"`
