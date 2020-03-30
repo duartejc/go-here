@@ -164,8 +164,8 @@ func (s *RoutingService) CreateRoutingParams(waypoints []WaypointParams, apiKey 
 
 	for idx, waypoint := range waypoints {
 		stringWaypoint := createWaypoint(waypoint)
-		waypointFieldName := fmt.Sprintf("Waypoint%s", idx)
-		reflect.ValueOf(&routingParams).Elem().FieldByName(waypointFieldName).SetString(stringWaypoint)
+		// waypointFieldName := fmt.Sprintf("Waypoint%s", idx)
+		reflect.ValueOf(&routingParams).Elem().FieldByName("Waypoint0").SetString(stringWaypoint)
 	}
 
 	return routingParams
