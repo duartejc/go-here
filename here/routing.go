@@ -161,9 +161,10 @@ func (s *RoutingService) CreateRoutingParams(waypoints []WaypointParams, apiKey 
 	routeModes := buffer.String()
 	routeModes = routeModes[:len(routeModes)-1]
 	routingParams := RoutingParams{
-		APIKey:    apiKey,
-		Modes:     routeModes,
-		Departure: "now",
+		APIKey:       apiKey,
+		Modes:        routeModes,
+		Departure:    "now",
+		Alternatives: 5,
 	}
 
 	for i, waypoint := range waypoints {
