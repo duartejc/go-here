@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"reflect"
+	"strconv"
 
 	"github.com/google/go-querystring/query"
 )
@@ -20,6 +22,12 @@ type ImagesParams struct {
 	Waypoint0 string `url:"waypoint0"`
 	Waypoint1 string `url:"waypoint1"`
 	Poi0      string `url:"poix0"`
+	Poi1      string `url:"poix1"`
+	Poi2      string `url:"poix2"`
+	Poi3      string `url:"poix3"`
+	Poi4      string `url:"poix4"`
+	Poi5      string `url:"poix5"`
+	Poi6      string `url:"poix6"`
 	Poithm    int    `url:"poithm"`
 	// Poi1       string `url:"poi1"`
 	// LineColor0 string `url:"lc0"`
@@ -40,20 +48,30 @@ func newImagesService(httpClient *http.Client, baseURL string) *ImagesService {
 	}
 }
 
+// Returns waypoints as a formatted string.
+func createPoi(poi WaypointParams) string {
+	return fmt.Sprintf("%f,%f;", poi.Coordinates[0], poi.Coordinates[1])
+}
+
 // CreateImagesParams creates images parameters struct.
 func (s *ImagesService) CreateImagesParams(waypoints []WaypointParams, apiKey string) ImagesParams {
 
 	stringWaypoint0 := createWaypoint(WaypointParams{Coordinates: waypoints[0].Coordinates})
-	stringWaypoint1 := createWaypoint(WaypointParams{Coordinates: waypoints[2].Coordinates})
-	stringPoi0 := fmt.Sprintf("%swhite;black;12;%s", createWaypoint(WaypointParams{Coordinates: waypoints[1].Coordinates}), waypoints[1].Text)
+	stringWaypoint1 := createWaypoint(WaypointParams{Coordinates: waypoints[len(waypoints)-1].Coordinates})
 
 	imagesParams := ImagesParams{
 		Waypoint0: stringWaypoint0,
 		Waypoint1: stringWaypoint1,
-		Poi0:      stringPoi0,
 		Poithm:    0,
 		APIKey:    apiKey,
 	}
+
+	for i, waypoint := range waypoints[1 : len(waypoints)-1] {
+		stringPoi := createPoi(waypoint)
+		concatenated := "Poi" + strconv.Itoa(i)
+		reflect.ValueOf(&imagesParams).Elem().FieldByName(concatenated).SetString(stringPoi)
+	}
+
 	return imagesParams
 }
 
