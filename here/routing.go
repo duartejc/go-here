@@ -30,6 +30,12 @@ type RoutingParams struct {
 	Waypoint2    string `url:"waypoint2"`
 	Waypoint3    string `url:"waypoint3"`
 	Waypoint4    string `url:"waypoint4"`
+	Waypoint5    string `url:"waypoint5"`
+	Waypoint6    string `url:"waypoint6"`
+	Waypoint7    string `url:"waypoint7"`
+	Waypoint8    string `url:"waypoint8"`
+	Waypoint9    string `url:"waypoint9"`
+	Waypoint10   string `url:"waypoint10"`
 	APIKey       string `url:"apikey"`
 	Modes        string `url:"mode"`
 	Departure    string `url:"departure"`
