@@ -19,6 +19,7 @@ type RoutingService struct {
 // WaypointParams params
 type WaypointParams struct {
 	Coordinates [2]float32
+	Type        string
 	StopOver    int
 	Text        string
 }

@@ -50,7 +50,11 @@ func newImagesService(httpClient *http.Client, baseURL string) *ImagesService {
 
 // Returns waypoints as a formatted string.
 func createPoi(poi WaypointParams) string {
-	return fmt.Sprintf("%f,%f;", poi.Coordinates[0], poi.Coordinates[1])
+	if poi.Type == "gas_station" {
+		return fmt.Sprintf("%f,%f;%s;%s;%s;%s", poi.Coordinates[0], poi.Coordinates[1], "red", "white", "10", "Abastecer")
+	} else {
+		return fmt.Sprintf("%f,%f;%s;%s;%s;%s", poi.Coordinates[0], poi.Coordinates[1], "blue", "white", "10", "Parada")
+	}
 }
 
 // CreateImagesParams creates images parameters struct.
